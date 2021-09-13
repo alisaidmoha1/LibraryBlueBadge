@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Library.Model
 {
-    class LibraryCardListItem
+    public class LibraryCardListItem
     {
+        public int LibraryCardId { get; set; }
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public Guid LibraryCardsId { get; set; }
     }
 }

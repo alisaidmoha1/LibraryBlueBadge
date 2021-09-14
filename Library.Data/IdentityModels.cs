@@ -36,19 +36,19 @@ namespace Library.Data
             return new ApplicationDbContext();
         }
 
-<<<<<<< HEAD
+
 
         public DbSet<Checkout> Checkouts { get; set; }
 
 
 
         public DbSet<LibraryCard> LibraryCards { get; set; }
+
+
         
-=======
-        public DbSet<Checkout> Checkouts { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<LibraryCard> LibraryCards { get; set; }        
->>>>>>> 70fede1ca7e66b2cf5e15dcba883e13dccc40cd9
+       
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -61,32 +61,22 @@ namespace Library.Data
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
         }
-<<<<<<< HEAD
 
-    }
-=======
-    }  
-
->>>>>>> 70fede1ca7e66b2cf5e15dcba883e13dccc40cd9
-    public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
-    {
-        public IdentityUserLoginConfiguration()
+        public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
         {
-            HasKey(IdentityUserLogin => IdentityUserLogin.UserId);
+            public IdentityUserLoginConfiguration()
+            {
+                HasKey(IdentityUserLogin => IdentityUserLogin.UserId);
+            }
+        }
+
+        public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
+
+        {
+            public IdentityUserRoleConfiguration()
+            {
+                HasKey(iur => iur.UserId);
+            }
         }
     }
-
-    public class IdentityUserRoleConfiguration: EntityTypeConfiguration<IdentityUserRole>
-
-    {
-        public IdentityUserRoleConfiguration()
-        {
-            HasKey(iur => iur.UserId);
-        }
-<<<<<<< HEAD
-                
-    }
-=======
-    }    
->>>>>>> 70fede1ca7e66b2cf5e15dcba883e13dccc40cd9
 }

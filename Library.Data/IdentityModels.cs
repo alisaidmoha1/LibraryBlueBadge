@@ -3,6 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Library.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -27,6 +28,7 @@ namespace Library.Data
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+
         }
 
         public static ApplicationDbContext Create()
@@ -35,6 +37,7 @@ namespace Library.Data
         }
 
 
+        public DbSet<Book> Books { get; set; }
         public DbSet<LibraryCard> LibraryCards { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -43,29 +46,28 @@ namespace Library.Data
                 .Conventions
                 .Remove<PluralizingTableNameConvention>();
 
+
             modelBuilder
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
         }
 
+    }
 
-        public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
+    public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
+    {
+        public IdentityUserLoginConfiguration()
         {
-            public IdentityUserLoginConfiguration()
-            {
-                HasKey(iul => iul.UserId);
-            }
+            HasKey(iul => iul.UserId);
         }
+    }
 
-
-        public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
+    public class IdentityUserRoleConfiguration: EntityTypeConfiguration<IdentityUserRole>
+    {
+        public IdentityUserRoleConfiguration()
         {
-            public IdentityUserRoleConfiguration()
-
-            {
-                HasKey(iur => iur.UserId);
-            }
-        }
+            HasKey(iur => iur.UserId);
+ }
     }
 }

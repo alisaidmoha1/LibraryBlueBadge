@@ -41,7 +41,7 @@ namespace Library.Service
                 var query =
                     ctx
                         .LibraryCards
-                        .Where(c => c.LibraryCardsId == _userId)
+                        .Where(c => c.AdminId == _userId)
                         .Select(
                             c =>
                                 new LibraryCardListItem
@@ -61,7 +61,7 @@ namespace Library.Service
                 var entity =
                     ctx
                         .LibraryCards
-                        .Single(c => c.LibraryCardId == id);
+                        .Single(c => c.LibraryCardId == id && c.AdminId == _userId);
                 return
                     new LibraryCardDetail
                     {
@@ -78,7 +78,7 @@ namespace Library.Service
                 var entity =
                     ctx
                         .LibraryCards
-                        .Single(c => c.LibraryCardId == card.LibraryCardId);
+                        .Single(c => c.LibraryCardId == card.LibraryCardId && c.AdminId == _userId);
 
 
                 entity.LibraryCardId = card.LibraryCardId;
@@ -95,7 +95,7 @@ namespace Library.Service
                 var entity =
                     ctx
                         .LibraryCards
-                        .Single(c => c.LibraryCardId == cardId);
+                        .Single(c => c.LibraryCardId == cardId && c.AdminId == _userId);
 
                 ctx.LibraryCards.Remove(entity);
 

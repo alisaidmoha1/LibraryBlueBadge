@@ -13,5 +13,6 @@ namespace Library.Model
         public string FullName { get; set; }
         public int BookId { get; set; }
         public virtual Book Books { get; set; }
+        public Guid AdminIdd { get; set; }
     }
 }

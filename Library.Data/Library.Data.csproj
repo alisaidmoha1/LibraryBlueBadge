@@ -86,7 +86,7 @@
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaidClass.cs" />
+    <Compile Include="Book.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

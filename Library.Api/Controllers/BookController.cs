@@ -63,7 +63,7 @@ namespace Library.Api.Controllers
             return Ok($"You updated book Id No: {book.BookId}");
         }
 
-        public IHttpActionResult Put (BookEdit book, [FromBody] int amount)
+        public IHttpActionResult Put (BookEdit book, [FromUri] int amount)
         {
             var service = CreateBookService();
 

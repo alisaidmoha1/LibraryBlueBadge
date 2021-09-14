@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -54,11 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
 
     <Compile Include="CheckoutService.cs" />
 
     <Compile Include="LibraryCardService.cs" />
 
+=======
+    <Compile Include="CheckoutService.cs" />
+    <Compile Include="BookService.cs" />
+    <Compile Include="LibraryCardService.cs" />
+>>>>>>> 70fede1ca7e66b2cf5e15dcba883e13dccc40cd9
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Library.Data\Library.Data.csproj">
+      <Project>{685AB61C-AF20-4700-8955-13BBF84640BE}</Project>
+      <Name>Library.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library.Model\Library.Model.csproj">
+      <Project>{B22BB7B5-C22B-4DB6-A9CA-6946E5AFC7A9}</Project>
+
       <Project>{685ab61c-af20-4700-8955-13bbf84640be}</Project>
       <Name>Library.Data</Name>
     </ProjectReference>

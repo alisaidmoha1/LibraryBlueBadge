@@ -1,5 +1,4 @@
-﻿using Library.Api.Data;
-using Library.Data;
+﻿using Library.Data;
 using Library.Model;
 using System;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace Library.Service
 
                     FullName = model.FullName,
 
-                    DateOfCheckout = model.DateOfCheckout
+                    DateOfCheckout = new DateTime (model.Year, model.Month, model.Day)
                 };
             using (var ctx = new ApplicationDbContext())
             {

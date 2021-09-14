@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,7 @@ namespace Library.Model
         public string FullName { get; set; }
         public string Address { get; set; }
         public Guid LibraryCardsId { get; set; }
+        public int BookId { get; set; }
+        public virtual Book Books { get; set; }
     }
 }

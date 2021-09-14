@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Library.Model
         [Required]
         public int LibraryCardId { get; set; }
         public string FullName { get; set; }
+        public int BookId { get; set; }
+        public virtual Book Books { get; set; }
         public string Address { get; set; }
     }
 }

@@ -16,5 +16,7 @@ namespace Library.Data
         public string Address { get; set; }
 
         public Guid LibraryCardsId { get; set; }
+        public int BookId { get; set; }
+        public virtual Book Books { get; set; }
     }
 }

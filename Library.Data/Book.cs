@@ -22,5 +22,7 @@ namespace Library.Data
         public string AuthorName { get; set; }
        [Required]
         public string PublishedDate { get; set; }
+       [Required]
+        public int Quantity { get; set; }
     }
 }

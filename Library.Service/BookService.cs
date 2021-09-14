@@ -58,7 +58,7 @@ namespace Library.Service
             }
         }
 
-        public BookList GetBookById (int id)
+        public BookList GetBookById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -84,6 +84,18 @@ namespace Library.Service
                 entity.ISBN = book.ISBN;
                 entity.AuthorName = book.AuthorName;
                 entity.PublishedDate = book.PublishedDate;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool RestockBooks (BookEdit book, int amount)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                Book entity = ctx.Books.Single(e => e.BookId == book.BookId && e.AdminId == _userId);
+
+                entity.Quantity += amount;
 
                 return ctx.SaveChanges() == 1;
             }

@@ -1,5 +1,7 @@
-﻿using System.Security.Claims;
+﻿using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Library.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -29,5 +31,7 @@ namespace Library.Api.Data
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Checkout> Checkouts { get; set; }
     }
 }

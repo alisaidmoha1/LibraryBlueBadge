@@ -19,13 +19,13 @@ namespace Library.Api.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return $"value {id.ToString()}" ;
+            return "value" ;
         }
 
         // POST api/values
-        public string Post([FromBody]string value)
+        public void Post([FromBody]string value)
         {
-            return value;
+            
         }
 
         // PUT api/values/5

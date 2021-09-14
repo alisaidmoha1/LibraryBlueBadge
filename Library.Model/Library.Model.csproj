@@ -59,6 +59,7 @@
     <Compile Include="BookList.cs" />
     <Compile Include="CheckoutCreate.cs" />
     <Compile Include="CheckoutDetail.cs" />
+    <Compile Include="CheckoutEdit.cs" />
     <Compile Include="CheckoutListItem.cs" />
     <Compile Include="LibraryCardCreate.cs" />
     <Compile Include="LibraryCardDetail.cs" />

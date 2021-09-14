@@ -10,6 +10,13 @@ namespace Library.Service
 {
     public class CheckoutService
     {
+        private readonly Guid _userId;
+
+        public CheckoutService(Guid userId)
+        {
+            _userId = userId;
+        }
+
         public bool CreateCheckout(CheckoutCreate model)
         {
             var entity =
@@ -23,7 +30,7 @@ namespace Library.Service
 
                     FullName = model.FullName,
 
-                    DateOfCheckout = new DateTime (model.Year, model.Month, model.Day)
+                    DateOfCheckout = new DateTime(model.Year, model.Month, model.Day)
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -32,14 +39,14 @@ namespace Library.Service
 
             }
         }
-        public IEnumerable<CheckoutListItem> GetCheckouts(int libraryCardId)
+        public IEnumerable<CheckoutListItem> GetCheckouts(int checkoutId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Checkouts
-                    .Where(e => e.LibraryCardId == libraryCardId)
+                    .Where(e => e.CheckoutID == checkoutId)
                     .Select(
                         e =>
                         new CheckoutListItem
@@ -57,6 +64,45 @@ namespace Library.Service
                         }
                         );
                 return query.ToArray();
+            }
+        }
+        public bool UpdateCheckout(CheckoutEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Checkouts
+                    .Single(e => e.CheckoutID == model.CheckoutID && e.AdminId == _userId);
+
+                entity.CheckoutID = model.CheckoutID;
+
+                entity.DateOfCheckout = DateTime.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public CheckoutDetail GetCheckoutById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Checkouts
+                    .Single(e => e.CheckoutID == id && e.AdminId == _userId);
+
+                return new CheckoutDetail
+                {
+                    CheckoutID = entity.CheckoutID,
+
+                    BookId = entity.BookId,
+
+                    LibraryCardId = entity.LibraryCardId,
+
+                    FullName = entity.FullName,
+
+                    DateOfCheckout = entity.DateOfCheckout
+                };
             }
         }
     }

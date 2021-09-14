@@ -1,6 +1,7 @@
 ﻿using Library.Data;
 using Library.Model;
 using Library.Service;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,18 @@ namespace Library.Api.Controllers
     [Authorize]
     public class CheckoutController : ApiController
     {
+
         private CheckoutService CreateCheckoutService()
         {
-            var checkoutService = new CheckoutService();
+            var checkoutId = Guid.Parse(User.Identity.GetUserId());
+            var checkoutService = new CheckoutService(checkoutId);
             return checkoutService;
+            ;
         }
-        public IHttpActionResult Get(int libraryId)
+        public IHttpActionResult Get(int checkoutId)
         {
             CheckoutService checkoutService = CreateCheckoutService();
-            var checkouts = checkoutService.GetCheckouts(libraryId);
+            var checkouts = checkoutService.GetCheckouts(checkoutId);
             return Ok(checkouts);
         }
         public IHttpActionResult Post(CheckoutCreate checkout)
@@ -36,27 +40,7 @@ namespace Library.Api.Controllers
 
             return Ok();
         }
-        public CheckoutDetail GetCheckoutById(int id)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity = 
-                    ctx
-                    .Checkouts
-                    .Single(e => e.CheckoutID == id && e.ownerId == _userId);
-                return new CheckoutDetail
-                {
-                    CheckoutID = entity.CheckoutId,
-
-                    BookId = entity.BookId,
-
-                    LibraryCardId = entity.LibraryCardId,
-
-                    FullName = entity.FullName,
-
-                    DateOfCheckout = entity.DateOfCheckout
-                };
-            }
+        
         }
     }
-}
+

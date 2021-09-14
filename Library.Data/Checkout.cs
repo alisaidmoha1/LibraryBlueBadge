@@ -19,5 +19,7 @@ namespace Library.Data
         public string FullName { get; set; } 
         [Required]
         public DateTime DateOfCheckout { get; set; }
+        
+        public Guid AdminId { get; set; }
     }
 }

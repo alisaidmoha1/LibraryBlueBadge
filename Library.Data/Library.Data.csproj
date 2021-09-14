@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checkout.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="LibraryCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

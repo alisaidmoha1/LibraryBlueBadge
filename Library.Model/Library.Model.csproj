@@ -54,9 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookAmount.cs" />
     <Compile Include="BookCreate.cs" />
     <Compile Include="BookEdit.cs" />
     <Compile Include="BookList.cs" />
+    <Compile Include="CheckoutCreate.cs" />
+    <Compile Include="CheckoutListItem.cs" />
     <Compile Include="LibraryCardCreate.cs" />
     <Compile Include="LibraryCardDetail.cs" />
     <Compile Include="LibraryCardEdit.cs" />

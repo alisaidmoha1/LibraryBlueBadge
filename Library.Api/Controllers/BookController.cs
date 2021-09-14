@@ -30,7 +30,7 @@ namespace Library.Api.Controllers
             return Ok(books);
         }
 
-        public IHttpActionResult Post (BookCreate book)
+        public IHttpActionResult Post(BookCreate book)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -50,6 +50,7 @@ namespace Library.Api.Controllers
             return Ok(book);
         }
 
+        [Route("api/Book/{id}/Update")]
         public IHttpActionResult Put(BookEdit book)
         {
             if (!ModelState.IsValid)
@@ -63,11 +64,12 @@ namespace Library.Api.Controllers
             return Ok($"You updated book Id No: {book.BookId}");
         }
 
-        public IHttpActionResult Put (BookEdit book, [FromUri] int amount)
+        [Route("api/Book/{id}/Restock")]
+        public IHttpActionResult Put(BookAmount amount)
         {
             var service = CreateBookService();
 
-            if (!service.RestockBooks(book, amount))
+            if (!service.RestockBooks(amount))
                 return InternalServerError();
 
             return Ok();

@@ -13,28 +13,28 @@ namespace Library.Api.Controllers
     [Authorize]
     public class LibraryCardController : ApiController
     {
-       private LibraryCardService LibraryCardService()
+       private LibraryCardService CreateLibraryCardService()
         {
-            var cardId = Guid.Parse(User.Identity.GetUserId());
+            var libraryCardId = Guid.Parse(User.Identity.GetUserId());
             var libraryCardService = new LibraryCardService(libraryCardId);
             return libraryCardService;
         }
 
         public IHttpActionResult Get()
         {
-            LibraryCardService libraryCardService = LibraryCardService();
-            var cards = libraryCardService.GetCards();
-            return Ok(cards);
+            LibraryCardService libraryCardService = CreateLibraryCardService();
+            var libraryCards= libraryCardService.GetLibraryCards();
+            return Ok(libraryCards);
         }
 
-        public IHttpActionResult Post(LibraryCardCreate card)
+        public IHttpActionResult Post(LibraryCardCreate libraryCard)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var service = CreateLibraryCardService();
 
-            if (!service.LibraryCardCreate(cards))
+            if (!service.CreateLibraryCard(libraryCard))
                 return InternalServerError();
 
             return Ok();
@@ -42,8 +42,8 @@ namespace Library.Api.Controllers
 
         public IHttpActionResult Get(int id)
         {
-            LibraryCardService libraryCardService = CreateLibraryService();
-            var card = libraryCardService.GetCardById(id);
+            LibraryCardService libraryCardService = CreateLibraryCardService();
+            var card = libraryCardService.GetLibraryCardById(id);
             return Ok(card);
         }
 

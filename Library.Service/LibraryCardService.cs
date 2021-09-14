@@ -1,4 +1,4 @@
-﻿using Library.Api.Data;
+﻿
 using Library.Data;
 using Library.Model;
 using System;
@@ -13,9 +13,9 @@ namespace Library.Service
     {
         private readonly Guid _userId;
 
-        public LibraryCardService(Guid _userId)
+        public LibraryCardService(Guid userId)
         {
-            _userId = LibraryCardsId;
+            _userId = userId;
         }
 
         public bool CreateLibraryCard(LibraryCardCreate model)
@@ -35,7 +35,7 @@ namespace Library.Service
             }
         }
 
-        public IEnumerable<LibraryCardListItem> GetCards()
+        public IEnumerable<LibraryCardListItem> GetLibraryCards()
         {
             using (var ctx = new ApplicationDbContext())
             {

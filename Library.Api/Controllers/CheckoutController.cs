@@ -1,4 +1,5 @@
-﻿using Library.Model;
+﻿using Library.Data;
+using Library.Model;
 using Library.Service;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,28 @@ namespace Library.Api.Controllers
                 return InternalServerError();
 
             return Ok();
+        }
+        public CheckoutDetail GetCheckoutById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = 
+                    ctx
+                    .Checkouts
+                    .Single(e => e.CheckoutID == id && e.ownerId == _userId);
+                return new CheckoutDetail
+                {
+                    CheckoutID = entity.CheckoutId,
+
+                    BookId = entity.BookId,
+
+                    LibraryCardId = entity.LibraryCardId,
+
+                    FullName = entity.FullName,
+
+                    DateOfCheckout = entity.DateOfCheckout
+                };
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Library.Model
         public string FullName { get; set; }
 
         //[Required]
-       // public string DateOfCheckout { get; set; }
+       // public string DateOfCheckout { get; set; } look into format for date time otherwise a temporary solution
 
         public int Month { get; set; }
         public int Year { get; set; }

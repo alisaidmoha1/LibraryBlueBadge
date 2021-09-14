@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckoutCreate.cs" />
+    <Compile Include="CheckoutListItem.cs" />
     <Compile Include="BookCreate.cs" />
     <Compile Include="BookEdit.cs" />
     <Compile Include="BookList.cs" />

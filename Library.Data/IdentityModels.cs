@@ -21,6 +21,7 @@ namespace Library.Data
             // Add custom user claims here
             return userIdentity;
         }
+        public int LibraryCardId { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -28,7 +29,6 @@ namespace Library.Data
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-
         }
 
         public static ApplicationDbContext Create()
@@ -36,38 +36,37 @@ namespace Library.Data
             return new ApplicationDbContext();
         }
 
-
+        public DbSet<Checkout> Checkouts { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<LibraryCard> LibraryCards { get; set; }
-        
+        public DbSet<LibraryCard> LibraryCards { get; set; }        
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
                 .Conventions
                 .Remove<PluralizingTableNameConvention>();
 
-
             modelBuilder
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
         }
-
-    }
+    }  
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
     {
         public IdentityUserLoginConfiguration()
         {
-            HasKey(iul => iul.UserId);
+            HasKey(IdentityUserLogin => IdentityUserLogin.UserId);
         }
     }
 
     public class IdentityUserRoleConfiguration: EntityTypeConfiguration<IdentityUserRole>
+
     {
         public IdentityUserRoleConfiguration()
         {
             HasKey(iur => iur.UserId);
- }
-    }
+        }
+    }    
 }

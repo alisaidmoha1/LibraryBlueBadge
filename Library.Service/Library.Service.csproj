@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckoutService.cs" />
     <Compile Include="BookService.cs" />
     <Compile Include="LibraryCardService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +70,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Library.Model\Library.Model.csproj">
       <Project>{B22BB7B5-C22B-4DB6-A9CA-6946E5AFC7A9}</Project>
+
       <Project>{685ab61c-af20-4700-8955-13bbf84640be}</Project>
       <Name>Library.Data</Name>
     </ProjectReference>

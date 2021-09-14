@@ -11,12 +11,6 @@ namespace Library.Service
 {
     public class CheckoutService
     {
-        private readonly Guid _userId;
-
-        public CheckoutService(Guid userId)
-        {
-            _userId = userId;
-        }
         public bool CreateCheckout(CheckoutCreate model)
         {
             var entity =
@@ -39,14 +33,14 @@ namespace Library.Service
 
             }
         }
-        public IEnumerable<CheckoutListItem> GetCheckouts(int checkoutId)
+        public IEnumerable<CheckoutListItem> GetCheckouts(int libraryCardId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Checkouts
-                    .Where(e => e.CheckoutID == checkoutId)
+                    .Where(e => e.LibraryCardId == libraryCardId)
                     .Select(
                         e =>
                         new CheckoutListItem

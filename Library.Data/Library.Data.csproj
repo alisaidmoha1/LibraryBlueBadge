@@ -87,8 +87,13 @@
     <Compile Include="Book.cs" />
     <Compile Include="Checkout.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LibraryCard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
+    <Compile Include="LibraryCard.cs" />
+=======
+    <Compile Include="Book.cs" />
+>>>>>>> fe198fbb0f5a922fb9b76b925167622e62259217
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

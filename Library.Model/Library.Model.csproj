@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Compile Include="BookAmount.cs" />
+>>>>>>> fe198fbb0f5a922fb9b76b925167622e62259217
     <Compile Include="BookCreate.cs" />
     <Compile Include="BookEdit.cs" />
     <Compile Include="BookList.cs" />

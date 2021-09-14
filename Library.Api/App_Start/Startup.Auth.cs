@@ -10,7 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Library.Api.Providers;
 using Library.Api.Models;
-using Library.Api.Data;
+using Library.Data;
 
 namespace Library.Api
 {

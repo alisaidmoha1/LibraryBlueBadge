@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LibraryCardCreate.cs" />
+    <Compile Include="LibraryCardDetail.cs" />
+    <Compile Include="LibraryCardEdit.cs" />
+    <Compile Include="LibraryCardListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

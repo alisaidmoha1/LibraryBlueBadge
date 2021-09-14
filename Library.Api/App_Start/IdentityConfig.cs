@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Library.Api.Models;
-using Library.Api.Data;
+using Library.Data;
 
 namespace Library.Api
 {

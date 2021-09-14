@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace Library.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
     {
         // GET api/values
@@ -19,12 +19,13 @@ namespace Library.Api.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return $"value {id.ToString()}" ;
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public string Post([FromBody]string value)
         {
+            return value;
         }
 
         // PUT api/values/5

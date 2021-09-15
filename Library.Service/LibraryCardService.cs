@@ -78,7 +78,8 @@ namespace Library.Service
                     new LibraryCardDetail
                     {
                         LibraryCardId = entity.LibraryCardId,
-                        FullName = entity.FullName
+                        FullName = entity.FullName,
+                        BookId = entity.Books.BookId
                     };
             }
         }

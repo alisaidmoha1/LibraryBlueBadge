@@ -53,7 +53,7 @@ namespace Library.Service
                                     LibraryCardId = c.LibraryCardId,
                                     FullName = c.FullName,
                                     Address = c.Address,
-                                    BookId = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
+                                    Books = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
 
                                     {
                                         BookId = e.BookId,

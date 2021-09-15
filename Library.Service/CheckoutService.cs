@@ -1,5 +1,6 @@
 ﻿using Library.Data;
 using Library.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,20 +8,26 @@ namespace Library.Service
 {
     public class CheckoutService
     {
+        private readonly Guid _userId;
+
+        public CheckoutService(Guid userId)
+        {
+            _userId = userId;
+        }
         public bool CreateCheckout(CheckoutCreate model)
         {
             var entity =
                 new Checkout()
                 {
-                    CheckoutID = model.CheckoutID,
+                    AdminId = _userId,
 
-                    BookId = model.CheckoutID,
+                    BookId = model.BookId,
 
                     LibraryCardId = model.LibraryCardId,
 
-                    FullName = model.FullName,
+                    Quantity = model.Quantity,
 
-                    DateOfCheckout = model.DateOfCheckout
+                    DateOfCheckout = System.DateTime.UtcNow
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -29,14 +36,14 @@ namespace Library.Service
 
             }
         }
-        public IEnumerable<CheckoutListItem> GetCheckouts(int libraryCardId)
+        public IEnumerable<CheckoutListItem> GetCheckouts()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Checkouts
-                    .Where(e => e.LibraryCardId == libraryCardId)
+                    .Where(e => e.AdminId == _userId)
                     .Select(
                         e =>
                         new CheckoutListItem
@@ -47,7 +54,7 @@ namespace Library.Service
 
                             LibraryCardId = e.LibraryCardId,
 
-                            FullName = e.FullName,
+                            Quantity = e.Quantity,
 
                             DateOfCheckout = e.DateOfCheckout
 

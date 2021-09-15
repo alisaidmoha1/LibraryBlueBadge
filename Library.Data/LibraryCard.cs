@@ -17,6 +17,6 @@ namespace Library.Data
 
         public Guid AdminId { get; set; }
         public int BookId { get; set; }
-        public virtual Book Books { get; set; }
+        // public virtual Book Books { get; set; }
     }
 }

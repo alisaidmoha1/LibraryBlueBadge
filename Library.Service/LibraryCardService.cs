@@ -51,7 +51,7 @@ namespace Library.Service
                                     LibraryCardId = c.LibraryCardId,
                                     FullName = c.FullName,
                                     Address = c.Address,
-                                    BookId = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
+                                    Books = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
 
                                     {
                                         BookId = e.BookId,
@@ -73,12 +73,13 @@ namespace Library.Service
                 var entity =
                     ctx
                         .LibraryCards
-                        .Single(c => c.LibraryCardId == id);
+                        .Single(c => c.LibraryCardId == id && c.AdminId == _userId);
                 return
                     new LibraryCardDetail
                     {
                         LibraryCardId = entity.LibraryCardId,
-                        FullName = entity.FullName
+                        FullName = entity.FullName,
+                        BookId = entity.Books.BookId
                     };
             }
         }

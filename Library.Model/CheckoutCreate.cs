@@ -9,19 +9,14 @@ namespace Library.Model
 {
     public class CheckoutCreate
     {
-        [Required]
-        public int CheckoutID { get; set; }
-       
-        [Required]
+ 
         public int BookId { get; set; }
         
-        [Required]
         public int LibraryCardId { get; set; }
         
-        [Required]
-        public string FullName { get; set; }
+        
+        public int Quantity { get; set; }
 
-        [Required]
         public DateTime DateOfCheckout { get; set; }
     }
 }

@@ -61,6 +61,7 @@ namespace Library.Service
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Books.Single(e => e.BookId == id && e.AdminId == _userId);
+
                 return new BookList
                 {
                     BookId = entity.BookId,

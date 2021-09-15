@@ -15,8 +15,7 @@ namespace Library.Model
         
         public int LibraryCardId { get; set; }
         
-        public string FullName { get; set; }
-        [Display(Name="Checkout date")]
+        public int Quantity { get; set; }
         public DateTime DateOfCheckout { get; set; }
     }
 }

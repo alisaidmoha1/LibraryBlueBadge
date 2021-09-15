@@ -36,6 +36,8 @@ namespace Library.Service
             }
         }
 
+
+
         public IEnumerable<LibraryCardListItem> GetLibraryCards()
         {
             using (var ctx = new ApplicationDbContext())

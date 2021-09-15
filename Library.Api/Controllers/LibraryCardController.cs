@@ -24,6 +24,10 @@ namespace Library.Api.Controllers
         {
             LibraryCardService libraryCardService = CreateLibraryCardService();
             var libraryCards = libraryCardService.GetLibraryCards();
+
+            if (libraryCards == null)
+                return BadRequest("There are no library cards in the library database!");
+
             return Ok(libraryCards);
         }
 
@@ -37,7 +41,7 @@ namespace Library.Api.Controllers
             if (!service.CreateLibraryCard(libraryCard))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You successfully created a library card.");
         }
 
         public IHttpActionResult Get(int id)
@@ -67,7 +71,7 @@ namespace Library.Api.Controllers
             if (!service.DeleteLibraryCard(id))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You deleted library card.");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Library.Api.Controllers
         public IHttpActionResult Get()
         {
             LibraryCardService libraryCardService = CreateLibraryCardService();
-            var libraryCards= libraryCardService.GetLibraryCards();
+            var libraryCards = libraryCardService.GetLibraryCards();
             return Ok(libraryCards);
         }
 

@@ -10,14 +10,18 @@ namespace Library.Data
     public class Checkout
     {
         [Key]
+        [Required]
         public int CheckoutID { get; set; }
+        public Guid AdminId { get; set; }
         [Required]
         public int BookId { get; set; }
         [Required]
         public int LibraryCardId { get; set; }
-        [Required]
-        public string FullName { get; set; } 
+        public virtual Book Books { get; set; }
+        public virtual LibraryCard LibraryCards { get; set; }
         [Required]
         public DateTime DateOfCheckout { get; set; }
+        [Required]
+        public int Quantity { get; set; }
     }
 }

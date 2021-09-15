@@ -105,5 +105,17 @@ namespace Library.Service
                 };
             }
         }
+        public bool DeleteNote(int checkoutId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Checkouts
+                    .Single(e => e.CheckoutID == checkoutId && e.AdminId == _userId);
+                ctx.Checkouts.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

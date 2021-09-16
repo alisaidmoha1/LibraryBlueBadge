@@ -105,7 +105,7 @@ namespace Library.Service
                 };
             }
         }
-        public bool DeleteNote(int checkoutId)
+        public bool DeleteCheckout(int checkoutId)
         {
             using (var ctx = new ApplicationDbContext())
             {

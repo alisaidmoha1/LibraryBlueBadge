@@ -9,6 +9,7 @@ namespace Library.Service
     public class CheckoutService
     {
         private readonly Guid _userId;
+        private readonly ICollection<Book> _books;
 
         public CheckoutService(Guid userId)
         {
@@ -21,7 +22,7 @@ namespace Library.Service
                 {
                     AdminId = _userId,
 
-                    BookId = model.BookId,
+                    BookId = model.BookId,                    
 
                     LibraryCardId = model.LibraryCardId,
 
@@ -29,11 +30,13 @@ namespace Library.Service
 
                     DateOfCheckout = System.DateTime.UtcNow
                 };
+            
             using (var ctx = new ApplicationDbContext())
-            {
+            { 
+                List<Book> books = new List<Book>();
+                books.Add(entity);
                 ctx.Checkouts.Add(entity);
                 return ctx.SaveChanges() == 1;
-
             }
         }
         public IEnumerable<CheckoutListItem> GetCheckouts()

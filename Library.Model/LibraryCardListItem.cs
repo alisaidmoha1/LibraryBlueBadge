@@ -14,5 +14,7 @@ namespace Library.Model
         public string Address { get; set; }
         public IQueryable BookId { get; set; }
         public IQueryable Books { get; set; }
+
+        public ICollection<Book> BBooks { get; set; }
     }
 }

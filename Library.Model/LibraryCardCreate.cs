@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 namespace Library.Model
 {
     public class LibraryCardCreate
+
     {
         public int LibraryCardId { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
         public int BookId { get; set; }
+        public List<Book> Books { get; set; }
+
+        public List<Book> books = new List<Book>();
     }
 }

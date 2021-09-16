@@ -13,8 +13,12 @@ namespace Library.Model
         public string ISBN { get; set; }
         public string AuthorName { get; set; }
         public string PublishedDate { get; set; }
+<<<<<<< HEAD
         public int Quantity { get; set; }
         public int LibraryCadId { get; set; }
 
+=======
+        public int Quantity { get; set; }        
+>>>>>>> f94dd4c6bb893193d76a4bd08f63d676f380f243
     }
 }

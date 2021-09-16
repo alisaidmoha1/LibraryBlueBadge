@@ -10,7 +10,7 @@ namespace Library.Service
 {
     public class LibraryCardService
     {
-        private readonly Guid _userId;
+        private readonly Guid _userId;        
 
         public LibraryCardService(Guid userId)
         {
@@ -18,7 +18,7 @@ namespace Library.Service
         }
 
         public bool CreateLibraryCard(LibraryCardCreate model)
-        {
+        {            
             var entity =
                 new LibraryCard()
                 {
@@ -26,16 +26,19 @@ namespace Library.Service
                     LibraryCardId = model.LibraryCardId,
                     FullName = model.FullName,
                     Address = model.Address,
+<<<<<<< HEAD
                    
+=======
+                    BookId = model.BookId                    
+>>>>>>> f94dd4c6bb893193d76a4bd08f63d676f380f243
                 };
-
+            
             using (var ctx = new ApplicationDbContext())
-            {
+            {                
                 ctx.LibraryCards.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-
         public IEnumerable<LibraryCardListItem> GetLibraryCards()
         {
             using (var ctx = new ApplicationDbContext())
@@ -92,6 +95,7 @@ namespace Library.Service
             }
         }
 
+
         public bool UpdateLibraryCard(LibraryCardEdit card)
         {
             using (var ctx = new ApplicationDbContext())
@@ -99,7 +103,7 @@ namespace Library.Service
                 var entity =
                     ctx
                         .LibraryCards
-                        .Single(c => c.LibraryCardId == card.LibraryCardId);
+                        .Single(c => c.LibraryCardId == card.LibraryCardId && c.AdminId == _userId);
 
 
                 entity.LibraryCardId = card.LibraryCardId;
@@ -116,7 +120,7 @@ namespace Library.Service
                 var entity =
                     ctx
                         .LibraryCards
-                        .Single(c => c.LibraryCardId == cardId);
+                        .Single(c => c.LibraryCardId == cardId && c.AdminId == _userId);
 
                 ctx.LibraryCards.Remove(entity);
 

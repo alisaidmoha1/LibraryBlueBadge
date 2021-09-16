@@ -17,31 +17,21 @@ namespace Library.Api.Controllers
 
         private CheckoutService CreateCheckoutService()
         {
-<<<<<<< HEAD
+
             var checkoutId = Guid.Parse(User.Identity.GetUserId());
             var checkoutService = new CheckoutService(checkoutId);
-=======
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var checkoutService = new CheckoutService(userId);
->>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
+                       
             return checkoutService;
-            ;
+            
         }
-<<<<<<< HEAD
+
         
-        public IHttpActionResult Get(int checkoutId)
-        {
-            CheckoutService checkoutService = CreateCheckoutService();
-            var checkouts = checkoutService.GetCheckouts(checkoutId);
-            return Ok(checkouts);
-=======
         public IHttpActionResult Get()
         {
             CheckoutService checkoutService = CreateCheckoutService();
-            var checkout = checkoutService.GetCheckouts();
+            var checkouts = checkoutService.GetCheckouts();
+            return Ok(checkouts);
 
-            return Ok(checkout);
->>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
         }
         
         public IHttpActionResult Post(CheckoutCreate checkout)

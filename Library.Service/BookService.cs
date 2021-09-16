@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-﻿
 using Library.Data;
-=======
-﻿using Library.Data;
->>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
-using Library.Model;
+﻿using Library.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

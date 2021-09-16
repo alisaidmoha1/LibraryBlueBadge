@@ -14,10 +14,7 @@ namespace Library.Service
         {
             _userId = userId;
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
         public bool CreateCheckout(CheckoutCreate model)
         {
             var entity =
@@ -31,11 +28,8 @@ namespace Library.Service
 
                     Quantity = model.Quantity,
 
-<<<<<<< HEAD
-                    DateOfCheckout = new DateTime(model.Year, model.Month, model.Day)
-=======
                     DateOfCheckout = System.DateTime.UtcNow
->>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
+
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -44,22 +38,18 @@ namespace Library.Service
 
             }
         }
-<<<<<<< HEAD
-        public IEnumerable<CheckoutListItem> GetCheckouts(int checkoutId)
-=======
+                
         public IEnumerable<CheckoutListItem> GetCheckouts()
->>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
         {
+
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Checkouts
-<<<<<<< HEAD
-                    .Where(e => e.CheckoutID == checkoutId)
-=======
+
                     .Where(e => e.AdminId == _userId)
->>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
+
                     .Select(
                         e =>
                         new CheckoutListItem
@@ -111,9 +101,7 @@ namespace Library.Service
                     BookId = entity.BookId,
 
                     LibraryCardId = entity.LibraryCardId,
-
-                    FullName = entity.FullName,
-
+                                       
                     DateOfCheckout = entity.DateOfCheckout
                 };
             }

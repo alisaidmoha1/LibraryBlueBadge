@@ -15,7 +15,7 @@ namespace Library.Service
             _userId = userId;
         }
 
-        public bool CreateBoook(BookCreate book)
+        public bool CreateBoook(BookCreate book, int id)
         {
             var entity = new Book()
             {
@@ -23,7 +23,8 @@ namespace Library.Service
                 Title = book.Title,
                 ISBN = book.ISBN,
                 AuthorName = book.AuthorName,
-                PublishedDate = book.PublishedDate
+                PublishedDate = book.PublishedDate,
+                LibraryCardId = id,
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -47,7 +48,13 @@ namespace Library.Service
                         ISBN = e.ISBN,
                         AuthorName = e.AuthorName,
                         PublishedDate = e.PublishedDate,
-                        Quantity = e.Quantity
+                        Quantity = e.Quantity,
+                        LibraryCardId = ctx.LibraryCards.Where(l => l.LibraryCardId == e.LibraryCardId).Select ( l =>
+                            new LibraryCardListItem
+                            {
+                                LibraryCardId = l.LibraryCardId,
+                                FullName = l.FullName,
+                            })
                     }
 
                     );

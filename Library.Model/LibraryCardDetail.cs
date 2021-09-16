@@ -11,6 +11,6 @@ namespace Library.Model
     {
         public int LibraryCardId { get; set; }
         public string FullName { get; set; }
-        public int BookId { get; set; }
+        public int? BookId { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Library.Model
         public string AuthorName { get; set; }
         public string PublishedDate { get; set; }
         public int Quantity { get; set; }
+        public int LibraryCadId { get; set; }
 
     }
 }

@@ -26,7 +26,7 @@ namespace Library.Service
                     LibraryCardId = model.LibraryCardId,
                     FullName = model.FullName,
                     Address = model.Address,
-                    BookId = model.BookId
+                   
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -51,15 +51,15 @@ namespace Library.Service
                                     LibraryCardId = c.LibraryCardId,
                                     FullName = c.FullName,
                                     Address = c.Address,
-                                    Books = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
+                                    //Books = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
 
-                                    {
-                                        BookId = e.BookId,
-                                        Title = e.Title,
-                                        ISBN = e.ISBN,
-                                        AuthorName = e.AuthorName,
-                                        PublishedDate = e.PublishedDate
-                                    })
+                                    //{
+                                    //    BookId = e.BookId,
+                                    //    Title = e.Title,
+                                    //    ISBN = e.ISBN,
+                                    //    AuthorName = e.AuthorName,
+                                    //    PublishedDate = e.PublishedDate
+                                    //})
                                 }
                                 );
                 return query.ToArray();
@@ -79,7 +79,15 @@ namespace Library.Service
                     {
                         LibraryCardId = entity.LibraryCardId,
                         FullName = entity.FullName,
-                        BookId = entity.Books.BookId
+                        //BookId = entity.BookId
+                        //BookId = ctx.Books.Where(e => e.BookId == entity.BookId).Select(e => new BookList
+                        //{
+                        //    BookId = e.BookId,
+                        //    Title = e.Title,
+                        //    ISBN = e.ISBN,
+                        //    AuthorName = e.AuthorName,
+                        //    PublishedDate = e.PublishedDate
+                        //})
                     };
             }
         }

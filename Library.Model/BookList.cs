@@ -14,5 +14,6 @@ namespace Library.Model
         public string AuthorName { get; set; }
         public string PublishedDate { get; set; }
         public int Quantity { get; set; }
+        public IQueryable LibraryCardId { get; set; }
     }
 }

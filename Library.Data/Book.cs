@@ -24,5 +24,7 @@ namespace Library.Data
         public string PublishedDate { get; set; }
        [Required]
         public int Quantity { get; set; }
+        public int? LibraryCardId { get; set; }
+        public virtual LibraryCard LibraryCards { get; set; }
     }
 }

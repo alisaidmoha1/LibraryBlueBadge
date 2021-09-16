@@ -30,14 +30,14 @@ namespace Library.Api.Controllers
             return Ok(books);
         }
 
-        public IHttpActionResult Post(BookCreate book)
+        public IHttpActionResult Post(BookCreate book, int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var service = CreateBookService();
 
-            if (!service.CreateBoook(book))
+            if (!service.CreateBoook(book, id))
                 return InternalServerError();
 
             return Ok("you successfuly created a book");

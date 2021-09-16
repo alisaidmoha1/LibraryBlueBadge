@@ -10,7 +10,6 @@ namespace Library.Model
 {
     public class LibraryCardCreate
     {
-        [Required]
         public int LibraryCardId { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }

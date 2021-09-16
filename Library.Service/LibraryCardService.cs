@@ -26,11 +26,7 @@ namespace Library.Service
                     LibraryCardId = model.LibraryCardId,
                     FullName = model.FullName,
                     Address = model.Address,
-<<<<<<< HEAD
-                   
-=======
                     BookId = model.BookId                    
->>>>>>> f94dd4c6bb893193d76a4bd08f63d676f380f243
                 };
             
             using (var ctx = new ApplicationDbContext())

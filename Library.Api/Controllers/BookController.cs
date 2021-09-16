@@ -19,6 +19,14 @@ namespace Library.Api.Controllers
             return bookService;
         }
 
+        public IHttpActionResult GetBooksByLibraryCardId(int libraryId)
+        {
+            var service = CreateBookService();
+            var book = service.GetAllBooksByLibraryCardId(libraryId);
+            return Ok(book);
+
+        }
+
         public IHttpActionResult Get()
         {
             BookService bookService = CreateBookService();
@@ -30,17 +38,28 @@ namespace Library.Api.Controllers
             return Ok(books);
         }
 
-        public IHttpActionResult Post(BookCreate book, int id)
+        public IHttpActionResult Post(BookCreate book)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var service = CreateBookService();
 
-            if (!service.CreateBoook(book, id))
+            if (!service.CreateBoook(book))
                 return InternalServerError();
 
             return Ok("you successfuly created a book");
+        }
+
+        public IHttpActionResult Post (int bookid, int libraryid)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateBookService();
+
+            service.AddBooksToLibrarayCard(bookid, libraryid);
+            return Ok();
         }
 
         public IHttpActionResult Get(int id)

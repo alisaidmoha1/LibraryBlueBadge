@@ -26,8 +26,15 @@ namespace Library.Data
        [Required]
         public int Quantity { get; set; }
 
-        [ForeignKey("LibraryCard")]
-        public int LibraryCardId { get; set; }
-        public virtual LibraryCard LibraryCards { get; set; }
+        //[ForeignKey("LibraryCard")]
+        //public int LibraryCardId { get; set; }
+        //public virtual LibraryCard LibraryCards { get; set; }
+
+        public virtual ICollection<LibraryCard> ListOfLibraryCards { get; set; }
+
+        public Book()
+        {
+            ListOfLibraryCards = new HashSet<LibraryCard>();
+        }
     }
 }

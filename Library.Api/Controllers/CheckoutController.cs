@@ -48,8 +48,8 @@ namespace Library.Api.Controllers
             if (books.Quantity < checkout.Quantity)
                 return BadRequest("Not enough books are in the library");
 
-            if (LibraryCard.Books.Count == 3)
-                return BadRequest("rary card has maxed out checkouts");
+            //if (LibraryCard.Books.Count == 3)
+                //return BadRequest("rary card has maxed out checkouts");
 
             books.Quantity -= checkout.Quantity;
 

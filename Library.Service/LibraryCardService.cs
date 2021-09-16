@@ -25,8 +25,7 @@ namespace Library.Service
                     AdminId = _userId,
                     LibraryCardId = model.LibraryCardId,
                     FullName = model.FullName,
-                    Address = model.Address,
-                    BookId = model.BookId                    
+                    Address = model.Address,                   
                 };
             
             using (var ctx = new ApplicationDbContext())

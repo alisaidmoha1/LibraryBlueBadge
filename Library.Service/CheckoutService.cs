@@ -33,8 +33,6 @@ namespace Library.Service
             
             using (var ctx = new ApplicationDbContext())
             { 
-                List<Book> books = new List<Book>();
-                books.Add(entity);
                 ctx.Checkouts.Add(entity);
                 return ctx.SaveChanges() == 1;
             }

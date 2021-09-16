@@ -15,7 +15,37 @@ namespace Library.Service
             _userId = userId;
         }
 
-        public bool CreateBoook(BookCreate book, int id)
+        public void AddBooksToLibrarayCard(int bookId, int libraryCardId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
+                foundBook.ListOfLibraryCards.Add(foundLibraryCard);
+                var result = ctx.SaveChanges();
+            }
+        }
+
+        public IEnumerable<BookList> GetAllBooksByLibraryCardId(int libraryCardId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var foundBooks = ctx.LibraryCards.Single(l => l.LibraryCardId == libraryCardId).ListOfBooks
+                    .Select(e => new BookList
+                    {
+                        BookId = e.BookId,
+                        ISBN = e.ISBN,
+                        AuthorName = e.AuthorName,
+                        PublishedDate = e.PublishedDate,
+
+                    }
+
+                        );
+                return foundBooks.ToArray();
+            }
+        }
+
+        public bool CreateBoook(BookCreate book)
         {
             var entity = new Book()
             {                
@@ -23,8 +53,7 @@ namespace Library.Service
                 Title = book.Title,
                 ISBN = book.ISBN,
                 AuthorName = book.AuthorName,
-                PublishedDate = book.PublishedDate,
-                LibraryCardId = id,               
+                PublishedDate = book.PublishedDate,             
             };
             
             using (var ctx = new ApplicationDbContext())
@@ -49,12 +78,6 @@ namespace Library.Service
                         AuthorName = e.AuthorName,
                         PublishedDate = e.PublishedDate,
                         Quantity = e.Quantity,
-                        LibraryCardId = ctx.LibraryCards.Where(l => l.LibraryCardId == e.LibraryCardId).Select ( l =>
-                            new LibraryCardListItem
-                            {
-                                LibraryCardId = l.LibraryCardId,
-                                FullName = l.FullName,
-                            })
                     }
 
                     );
@@ -80,6 +103,8 @@ namespace Library.Service
                 };
             }
         }
+
+        
 
         public bool UpdateBook(BookEdit book)
         {

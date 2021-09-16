@@ -23,12 +23,8 @@ namespace Library.Service
                 Title = book.Title,
                 ISBN = book.ISBN,
                 AuthorName = book.AuthorName,
-<<<<<<< HEAD
                 PublishedDate = book.PublishedDate,
-                LibraryCardId = id,
-=======
-                PublishedDate = book.PublishedDate,               
->>>>>>> f94dd4c6bb893193d76a4bd08f63d676f380f243
+                LibraryCardId = id,               
             };
             
             using (var ctx = new ApplicationDbContext())

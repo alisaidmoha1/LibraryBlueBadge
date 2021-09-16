@@ -10,7 +10,7 @@ namespace Library.Service
 {
     public class LibraryCardService
     {
-        private readonly Guid _userId;
+        private readonly Guid _userId;        
 
         public LibraryCardService(Guid userId)
         {
@@ -18,7 +18,7 @@ namespace Library.Service
         }
 
         public bool CreateLibraryCard(LibraryCardCreate model)
-        {
+        {            
             var entity =
                 new LibraryCard()
                 {
@@ -26,18 +26,15 @@ namespace Library.Service
                     LibraryCardId = model.LibraryCardId,
                     FullName = model.FullName,
                     Address = model.Address,
-                    BookId = model.BookId
+                    BookId = model.BookId                    
                 };
-
+            
             using (var ctx = new ApplicationDbContext())
-            {
+            {                
                 ctx.LibraryCards.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-
-
-
         public IEnumerable<LibraryCardListItem> GetLibraryCards()
         {
             using (var ctx = new ApplicationDbContext())

@@ -19,7 +19,7 @@ namespace Library.Data
 
         public int BookId { get; set; }
         public virtual Book Books { get; set; }
-        public ICollection<Book> book {get; set;}
+        public ICollection<Book> Bbook {get; set;}
     }
 }
 

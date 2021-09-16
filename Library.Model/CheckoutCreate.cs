@@ -12,8 +12,7 @@ namespace Library.Model
  
         public int BookId { get; set; }
         
-        public int LibraryCardId { get; set; }
-        
+        public int LibraryCardId { get; set; }       
         
         public int Quantity { get; set; }
 

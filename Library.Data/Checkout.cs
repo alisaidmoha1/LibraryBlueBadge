@@ -23,5 +23,6 @@ namespace Library.Data
         public DateTime DateOfCheckout { get; set; }
         [Required]
         public int Quantity { get; set; }
+
     }
 }

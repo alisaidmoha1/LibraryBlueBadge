@@ -9,23 +9,23 @@ namespace Library.Model
 {
     public class CheckoutCreate
     {
-        [Required]
-        public int CheckoutID { get; set; }
-       
-        [Required]
+ 
         public int BookId { get; set; }
         
-        [Required]
         public int LibraryCardId { get; set; }
         
-        [Required]
-        public string FullName { get; set; }
+        
+        public int Quantity { get; set; }
 
+<<<<<<< HEAD
         //[Required]
        // public string DateOfCheckout { get; set; } look into format for date time otherwise a temporary solution
 
         public int Month { get; set; }
         public int Year { get; set; }
         public int Day { get; set; }
+=======
+        public DateTime DateOfCheckout { get; set; }
+>>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
     }
 }

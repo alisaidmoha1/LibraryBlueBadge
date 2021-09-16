@@ -1,5 +1,4 @@
-﻿
-using Library.Data;
+﻿using Library.Data;
 using Library.Model;
 using System;
 using System.Collections.Generic;
@@ -23,9 +22,11 @@ namespace Library.Service
             var entity =
                 new LibraryCard()
                 {
+                    AdminId = _userId,
                     LibraryCardId = model.LibraryCardId,
                     FullName = model.FullName,
-                    Address = model.Address
+                    Address = model.Address,
+                    BookId = model.BookId
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -42,13 +43,23 @@ namespace Library.Service
                 var query =
                     ctx
                         .LibraryCards
-                        .Where(c => c.LibraryCardsId == _userId)
+                        .Where(c => c.AdminId == _userId)
                         .Select(
                             c =>
                                 new LibraryCardListItem
                                 {
                                     LibraryCardId = c.LibraryCardId,
                                     FullName = c.FullName,
+                                    Address = c.Address,
+                                    Books = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
+
+                                    {
+                                        BookId = e.BookId,
+                                        Title = e.Title,
+                                        ISBN = e.ISBN,
+                                        AuthorName = e.AuthorName,
+                                        PublishedDate = e.PublishedDate
+                                    })
                                 }
                                 );
                 return query.ToArray();
@@ -62,12 +73,13 @@ namespace Library.Service
                 var entity =
                     ctx
                         .LibraryCards
-                        .Single(c => c.LibraryCardId == id);
+                        .Single(c => c.LibraryCardId == id && c.AdminId == _userId);
                 return
                     new LibraryCardDetail
                     {
                         LibraryCardId = entity.LibraryCardId,
-                        FullName = entity.FullName
+                        FullName = entity.FullName,
+                        BookId = entity.Books.BookId
                     };
             }
         }

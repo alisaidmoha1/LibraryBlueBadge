@@ -66,10 +66,18 @@
   <ItemGroup>
     <ProjectReference Include="..\Library.Data\Library.Data.csproj">
       <Project>{685ab61c-af20-4700-8955-13bbf84640be}</Project>
+<<<<<<< HEAD
+=======
       <Name>Library.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library.Model\Library.Model.csproj">
       <Project>{b22bb7b5-c22b-4db6-a9ca-6946e5afc7a9}</Project>
+      <Project>{685AB61C-AF20-4700-8955-13BBF84640BE}</Project>
+>>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
+      <Name>Library.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library.Model\Library.Model.csproj">
+      <Project>{B22BB7B5-C22B-4DB6-A9CA-6946E5AFC7A9}</Project>
       <Name>Library.Model</Name>
     </ProjectReference>
   </ItemGroup>

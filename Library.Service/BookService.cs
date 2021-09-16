@@ -1,11 +1,13 @@
+<<<<<<< HEAD
 ﻿
 using Library.Data;
+=======
+﻿using Library.Data;
+>>>>>>> 5beee2520e0e6fc8b3d9f07931753185678dddb3
 using Library.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.Service
 {
@@ -49,7 +51,8 @@ namespace Library.Service
                         Title = e.Title,
                         ISBN = e.ISBN,
                         AuthorName = e.AuthorName,
-                        PublishedDate = e.PublishedDate
+                        PublishedDate = e.PublishedDate,
+                        Quantity = e.Quantity
                     }
 
                     );
@@ -63,13 +66,15 @@ namespace Library.Service
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Books.Single(e => e.BookId == id && e.AdminId == _userId);
+
                 return new BookList
                 {
                     BookId = entity.BookId,
                     Title = entity.Title,
                     ISBN = entity.ISBN,
                     AuthorName = entity.AuthorName,
-                    PublishedDate = entity.PublishedDate
+                    PublishedDate = entity.PublishedDate,
+                    Quantity = entity.Quantity
                 };
             }
         }
@@ -89,13 +94,15 @@ namespace Library.Service
             }
         }
 
-        public bool RestockBooks (BookEdit book, int amount)
+
+        public bool RestockBooks(BookAmount restock)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                Book entity = ctx.Books.Single(e => e.BookId == book.BookId && e.AdminId == _userId);
 
-                entity.Quantity += amount;
+                Book entity = ctx.Books.Single(e => e.BookId == restock.BookId && e.AdminId == _userId);
+
+                entity.Quantity += restock.Amount;
 
                 return ctx.SaveChanges() == 1;
             }

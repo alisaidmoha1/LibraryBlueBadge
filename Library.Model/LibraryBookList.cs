@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Library.Model
 {
-    public class LibraryCardDetail
+    public class LibraryBookList
     {
-        public int LibraryCardId { get; set; }
-        public string FullName { get; set; }
+        public int LibrarCardId { get; set; }
         public int BookId { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

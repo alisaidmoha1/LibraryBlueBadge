@@ -66,7 +66,16 @@ namespace Library.Api.Controllers
             if (books.ListOfBooks.Count > 3)
                 return BadRequest("You reached the maximum books you can borrow");
 
+            Book book = ctx.Books.Find(bookid);
+
+            if (book.Quantity == 0)
+                return BadRequest("The book you looking for is out of stock");
+
+
             service.AddBooksToLibrarayCard(bookid, libraryid);
+
+           // book.Quantity--;
+
             return Ok();
         }
 

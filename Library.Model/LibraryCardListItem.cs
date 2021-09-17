@@ -12,9 +12,6 @@ namespace Library.Model
         public int LibraryCardId { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
-        public IQueryable BookId { get; set; }
-        public IQueryable Books { get; set; }
-
-        public ICollection<Book> BBooks { get; set; }
+        public int Amount { get; set; }
     }
 }

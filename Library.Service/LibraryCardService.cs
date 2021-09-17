@@ -49,6 +49,8 @@ namespace Library.Service
                                     LibraryCardId = c.LibraryCardId,
                                     FullName = c.FullName,
                                     Address = c.Address,
+                                    Amount = c.ListOfBooks.Count,
+                                });
                                     //Books = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
 
                                     //{
@@ -58,8 +60,7 @@ namespace Library.Service
                                     //    AuthorName = e.AuthorName,
                                     //    PublishedDate = e.PublishedDate
                                     //})
-                                }
-                                );
+                                
                 return query.ToArray();
             }
         }

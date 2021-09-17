@@ -19,10 +19,25 @@ namespace Library.Service
         {
             using (var ctx = new ApplicationDbContext())
             {
+                
                 var foundBook = ctx.Books.Single(b => b.BookId == bookId);
                 var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
                 foundBook.ListOfLibraryCards.Add(foundLibraryCard);
-                var result = ctx.SaveChanges();
+                var result = ctx.SaveChanges() == 1;
+                
+            }
+        }
+
+        public void RemoveBooksFromLibraryCard(int bookId, int libraryCardId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
+                foundBook.ListOfLibraryCards.Remove(foundLibraryCard);
+                var result = ctx.SaveChanges() == 1;
+
             }
         }
 
@@ -53,7 +68,8 @@ namespace Library.Service
                 Title = book.Title,
                 ISBN = book.ISBN,
                 AuthorName = book.AuthorName,
-                PublishedDate = book.PublishedDate,             
+                PublishedDate = book.PublishedDate,
+                Quantity = book.Quantity,
             };
             
             using (var ctx = new ApplicationDbContext())

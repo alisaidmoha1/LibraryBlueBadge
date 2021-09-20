@@ -35,7 +35,7 @@ namespace Library.Service
             {
 
                 var foundBook = ctx.Books.Single(b => b.BookId == book.BookId);
-                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == book.LibraryId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == book.LibraryCardId);
                 foundBook.ListOfLibraryCards.Remove(foundLibraryCard);
                 foundBook.Quantity++;
                 var result = ctx.SaveChanges() == 1;

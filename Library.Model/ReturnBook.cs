@@ -9,7 +9,7 @@ namespace Library.Model
     public class ReturnBook
     {
         public int BookId { get; set; }
-        public int LibraryId { get; set; }
+        public int LibraryCardId { get; set; }
         public DateTime ReturnDate { get; set; }
     }
 }

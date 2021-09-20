@@ -28,7 +28,6 @@ namespace Library.Service
                 
             }
         }
-
         public void RemoveBooksFromLibraryCard(int bookId, int libraryCardId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -42,6 +41,35 @@ namespace Library.Service
 
             }
         }
+
+        public void ReserveBooksToLibrarayCard(int bookId, int libraryCardId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                DateTime pickUpDate = DateTime.UtcNow.AddDays(7); 
+                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
+                foundBook.ListOfLibraryCards.Add(foundLibraryCard);
+                foundBook.Quantity--;
+                var result = ctx.SaveChanges() == 1;
+                
+            }
+        }
+
+        public void RemoveBooksReserveFromLibraryCard(int bookId, int libraryCardId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
+                foundBook.ListOfLibraryCards.Remove(foundLibraryCard);
+                foundBook.Quantity++;
+                var result = ctx.SaveChanges() == 1;
+
+            }
+        }
+
 
         public IEnumerable<BookList> GetAllBooksByLibraryCardId(int libraryCardId)
         {

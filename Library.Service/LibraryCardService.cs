@@ -51,15 +51,7 @@ namespace Library.Service
                                     Address = c.Address,
                                     Amount = c.ListOfBooks.Count,
                                 });
-                                    //Books = ctx.Books.Where(e => e.BookId == c.BookId).Select(e => new BookList
 
-                                    //{
-                                    //    BookId = e.BookId,
-                                    //    Title = e.Title,
-                                    //    ISBN = e.ISBN,
-                                    //    AuthorName = e.AuthorName,
-                                    //    PublishedDate = e.PublishedDate
-                                    //})
                                 
                 return query.ToArray();
             }
@@ -78,15 +70,7 @@ namespace Library.Service
                     {
                         LibraryCardId = entity.LibraryCardId,
                         FullName = entity.FullName,
-                        //BookId = entity.BookId
-                        //BookId = ctx.Books.Where(e => e.BookId == entity.BookId).Select(e => new BookList
-                        //{
-                        //    BookId = e.BookId,
-                        //    Title = e.Title,
-                        //    ISBN = e.ISBN,
-                        //    AuthorName = e.AuthorName,
-                        //    PublishedDate = e.PublishedDate
-                        //})
+
                     };
             }
         }

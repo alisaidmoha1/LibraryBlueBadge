@@ -1,5 +1,4 @@
-﻿using Library.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Library.Model
 {
-    public class LibraryBookList
+    class LibraryCardBookReservation
     {
-        public int LibrarCardId { get; set; }
+        public int LibraryCardId { get; set; }
         public int BookId { get; set; }
-        
+        public DateTime ReserveDate { get; set; }
     }
 }

@@ -72,9 +72,34 @@ namespace Library.Api.Controllers
                 return BadRequest("The book you looking for is out of stock");
 
 
-            service.AddBooksToLibrarayCard(bookid, libraryid);
+            service.AddBooksToLibrarayCard(bookid, libraryid);           
 
-           // book.Quantity--;
+            return Ok();
+        }
+
+        
+        [ActionName("ReserveBook")]
+        public IHttpActionResult ReserveBook(int bookid, int libraryid)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateBookService();
+
+            var ctx = new ApplicationDbContext();
+
+            LibraryCard books = ctx.LibraryCards.Find(libraryid);
+
+            if (books.ListOfBooks.Count > 3)
+                return BadRequest("You reached the maximum books you can borrow");
+
+            Book book = ctx.Books.Find(bookid);
+
+            if (book.Quantity == 0)
+                return BadRequest("The book you looking for is out of stock");
+
+
+            service.AddBooksToLibrarayCard(bookid, libraryid);
 
             return Ok();
         }
@@ -83,8 +108,7 @@ namespace Library.Api.Controllers
         {
             var service = CreateBookService();
 
-            service.RemoveBooksFromLibraryCard(bookId, libraryId);
-                
+            service.RemoveBooksFromLibraryCard(bookId, libraryId);                
 
             return Ok($"You removed Book Id No: {bookId} from Library Card Id: {libraryId}");
         }

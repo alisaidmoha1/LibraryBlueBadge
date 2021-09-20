@@ -12,17 +12,23 @@ namespace Library.Data
         [Key]
         [Required]
         public int BookId { get; set; }
+
         [Required]
         public Guid AdminId { get; set; }
+
         [Required]
         public string Title { get; set; }
+
         [Required]
         public string ISBN { get; set; }
+
         [Required]
         public string AuthorName { get; set; }
-       [Required]
+
+        [Required]
         public string PublishedDate { get; set; }
-       [Required]
+
+        [Required]
         public int Quantity { get; set; }
     }
 }

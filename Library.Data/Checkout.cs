@@ -30,5 +30,6 @@ namespace Library.Data
 
         [Required]
         public int Quantity { get; set; }
+
     }
 }

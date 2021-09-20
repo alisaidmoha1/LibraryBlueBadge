@@ -42,7 +42,6 @@ namespace Library.Api.Controllers
             var ctx = new ApplicationDbContext();
             Book books = ctx.Books.Find(checkout.BookId);
             
-
             if (checkout.Quantity <= 0)
                 return BadRequest("You have to take at least one book to checkout");
 

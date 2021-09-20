@@ -18,14 +18,14 @@ namespace Library.Service
         public bool CreateBoook(BookCreate book)
         {
             var entity = new Book()
-            {
+            {                
                 AdminId = _userId,
                 Title = book.Title,
                 ISBN = book.ISBN,
                 AuthorName = book.AuthorName,
-                PublishedDate = book.PublishedDate
+                PublishedDate = book.PublishedDate,               
             };
-
+            
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Books.Add(entity);

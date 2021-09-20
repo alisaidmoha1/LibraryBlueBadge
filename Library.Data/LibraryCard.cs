@@ -10,6 +10,7 @@ namespace Library.Data
 {
     public class LibraryCard
     {
+
         [Key]
         public int LibraryCardId { get; set; }
 

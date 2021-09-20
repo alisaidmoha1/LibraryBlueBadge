@@ -25,10 +25,7 @@ namespace Library.Data
         public string PublishedDate { get; set; }
        [Required]
         public int Quantity { get; set; }
-
-        //[ForeignKey("LibraryCard")]
-        //public int LibraryCardId { get; set; }
-        //public virtual LibraryCard LibraryCards { get; set; }
+       
 
         public virtual ICollection<LibraryCard> ListOfLibraryCards { get; set; }
 

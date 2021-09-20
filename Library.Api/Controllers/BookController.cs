@@ -99,7 +99,7 @@ namespace Library.Api.Controllers
                 return BadRequest("The book you looking for is out of stock");
 
 
-            service.AddBooksToLibrarayCard(bookid, libraryid);
+            service.ReserveBooksToLibrarayCard(bookid, libraryid);
 
             return Ok();
         }

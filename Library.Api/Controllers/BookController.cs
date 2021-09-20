@@ -91,18 +91,24 @@ namespace Library.Api.Controllers
 
             var daysLate = book.ReturnDate - checkout.DueDate;
 
-            int dayCount = 0;
-
-            for (int i = 1; i<= daysLate.Days; i++)
+            if (daysLate.Days > 0)
             {
-                if (checkout.DueDate.AddDays(i).DayOfWeek != DayOfWeek.Sunday)
-                    dayCount++;
+
+                int dayCount = 0;
+
+                for (int i = 1; i <= daysLate.Days; i++)
+                {
+                    if (checkout.DueDate.AddDays(i).DayOfWeek != DayOfWeek.Sunday)
+                        dayCount++;
+                }
+
+                Decimal fine = dayCount * 0.10m;
+
+
+                return Ok($"You returned Book Id No: {book.BookId} and you should pay ${fine} because you were late {daysLate.Days} days");
             }
 
-            Decimal fine = dayCount * 0.10m;
-                
-
-            return Ok($"You returned Book Id No: {book.BookId} and you should pay {fine}");
+            return Ok($"You returned Book Id No: {book.BookId}");
         }
 
         public IHttpActionResult Get(int id)

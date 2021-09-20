@@ -9,7 +9,6 @@ namespace Library.Service
     public class CheckoutService
     {
         private readonly Guid _userId;
-        private readonly ICollection<Book> _books;
 
         public CheckoutService(Guid userId)
         {

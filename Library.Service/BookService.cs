@@ -15,7 +15,7 @@ namespace Library.Service
             _userId = userId;
         }
 
-        public bool CreateBoook(BookCreate book)
+        public bool CreateBook(BookCreate book)
         {
             var entity = new Book()
             {                
@@ -23,7 +23,8 @@ namespace Library.Service
                 Title = book.Title,
                 ISBN = book.ISBN,
                 AuthorName = book.AuthorName,
-                PublishedDate = book.PublishedDate,               
+                PublishedDate = book.PublishedDate, 
+                Quantity = book.Quantity
             };
             
             using (var ctx = new ApplicationDbContext())
@@ -84,6 +85,7 @@ namespace Library.Service
                 entity.ISBN = book.ISBN;
                 entity.AuthorName = book.AuthorName;
                 entity.PublishedDate = book.PublishedDate;
+                entity.Quantity = book.Quantity;
 
                 return ctx.SaveChanges() == 1;
             }

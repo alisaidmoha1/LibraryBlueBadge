@@ -78,7 +78,7 @@ namespace Library.Service
                 var entity =
                     ctx
                     .Checkouts
-                    .Single(e => e.CheckoutID == model.CheckoutID && e.AdminId == _userId);
+                    .Single(e => e.CheckoutID == model.CheckoutID);
 
                 entity.CheckoutID = model.CheckoutID;
 
@@ -115,9 +115,42 @@ namespace Library.Service
                 var entity =
                     ctx
                     .Checkouts
-                    .Single(e => e.CheckoutID == checkoutId && e.AdminId == _userId);
+                    .Single(e => e.CheckoutID == checkoutId);
                 ctx.Checkouts.Remove(entity);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool ReturnCheckout(int checkoutId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var checkout =
+                    ctx
+                    .Checkouts
+                    .Single(e => e.CheckoutID == checkoutId);
+                //when returning a book look at checkout and reduce quantity by 1
+                
+                checkout.Quantity--;
+                
+                //increase library quantity by one
+                
+                var book =
+                    ctx
+                    .Books
+                    .Single(e => e.BookId == checkout.BookId);
+                book.Quantity++;
+                
+                //if quantity = 0, delete checkout and increase library quantity by one
+                
+                var result = ctx.SaveChanges() == 1;
+
+                if (checkout.Quantity == 0)
+                {
+                    DeleteCheckout(checkoutId);
+                }
+                return result;
+
+
             }
         }
     }

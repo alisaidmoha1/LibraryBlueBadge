@@ -9,9 +9,15 @@ namespace Library.Model
     public class BookEdit
     {
         public int BookId { get; set; }
+        
         public string Title { get; set; }
+        
         public string ISBN { get; set; }
+        
         public string AuthorName {get; set;}
+        
         public string PublishedDate { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

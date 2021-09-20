@@ -86,6 +86,16 @@ namespace Library.Api.Controllers
 
             return Ok();
         }
+
+        [HttpPut]
+        [Route("api/Checkout/{checkoutId}/Return")]
+        public IHttpActionResult ReturnCheckout(int checkoutId)
+        {
+            var service = CreateCheckoutService();
+            if (!service.ReturnCheckout(checkoutId))
+                return InternalServerError();
+            return Ok();
+        }
     }
 }
 

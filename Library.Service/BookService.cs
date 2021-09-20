@@ -29,13 +29,13 @@ namespace Library.Service
             }
         }
 
-        public void RemoveBooksFromLibraryCard(int bookId, int libraryCardId)
+        public void RemoveBooksFromLibraryCard(ReturnBook book)
         {
             using (var ctx = new ApplicationDbContext())
             {
 
-                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
-                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
+                var foundBook = ctx.Books.Single(b => b.BookId == book.BookId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == book.LibraryId);
                 foundBook.ListOfLibraryCards.Remove(foundLibraryCard);
                 foundBook.Quantity++;
                 var result = ctx.SaveChanges() == 1;

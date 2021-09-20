@@ -26,8 +26,6 @@ namespace Library.Service
 
                     LibraryCardId = model.LibraryCardId,
 
-                    Quantity = model.Quantity,
-
                     DateOfCheckout = System.DateTime.UtcNow
                 };
             
@@ -55,7 +53,7 @@ namespace Library.Service
 
                             LibraryCardId = e.LibraryCardId,
 
-                            Quantity = e.Quantity,
+                            Quantity = e.LibraryCards.ListOfBooks.Count,
 
                             DateOfCheckout = e.DateOfCheckout
 

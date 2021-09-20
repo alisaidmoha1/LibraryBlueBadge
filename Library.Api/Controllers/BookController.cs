@@ -79,14 +79,30 @@ namespace Library.Api.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Delete (int bookId, int libraryId)
+        public IHttpActionResult Delete (ReturnBook book)
         {
             var service = CreateBookService();
 
-            service.RemoveBooksFromLibraryCard(bookId, libraryId);
+            service.RemoveBooksFromLibraryCard(book);
+
+            var ctx = new ApplicationDbContext();
+
+            Checkout checkout = ctx.Checkouts.Find(book.BookId);
+
+            var daysLate = book.ReturnDate - checkout.DueDate;
+
+            int dayCount = 0;
+
+            for (int i = 1; i<= daysLate.Days; i++)
+            {
+                if (checkout.DueDate.AddDays(i).DayOfWeek != DayOfWeek.Sunday)
+                    dayCount++;
+            }
+
+            Decimal fine = dayCount * 0.10m;
                 
 
-            return Ok($"You removed Book Id No: {bookId} from Library Card Id: {libraryId}");
+            return Ok($"You returned Book Id No: {book.BookId} and you should pay {fine}");
         }
 
         public IHttpActionResult Get(int id)

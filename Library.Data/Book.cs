@@ -21,11 +21,10 @@ namespace Library.Data
         public string ISBN { get; set; }
         [Required]
         public string AuthorName { get; set; }
-       [Required]
+        [Required]
         public string PublishedDate { get; set; }
-       [Required]
+        [Required]
         public int Quantity { get; set; }
-       
 
         public virtual ICollection<LibraryCard> ListOfLibraryCards { get; set; }
 

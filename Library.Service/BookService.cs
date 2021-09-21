@@ -42,15 +42,18 @@ namespace Library.Service
             }
         }
 
-        public void ReserveBooksToLibrarayCard(int bookId, int libraryCardId)
+        public void ReserveBooksToLibrarayCard(LibraryCardBookReservation reserve)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                DateTime pickUpDate = DateTime.UtcNow.AddDays(7); 
-                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
-                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
+                              
+                var foundBook = ctx.Books.Single(b => b.BookId == reserve.BookId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == reserve.LibraryCardId);
+                reserve.ReserveDate = DateTime.UtcNow;
+                reserve.PickUpDate = DateTime.UtcNow.AddDays(7);
                 foundBook.ListOfLibraryCards.Add(foundLibraryCard);
                 foundBook.Quantity--;
+                foundLibraryCard.ReservedBooks.Add(foundBook);
                 var result = ctx.SaveChanges() == 1;
                 
             }

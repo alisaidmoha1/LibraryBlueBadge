@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Library.Model
 {
-    class LibraryCardBookReservation
+    public class LibraryCardBookReservation
     {
         public int LibraryCardId { get; set; }
-        public int BookId { get; set; }
+        public int BookId { get; set; }        
         public DateTime ReserveDate { get; set; }
+        public DateTime PickUpDate { get; set; }
     }
 }

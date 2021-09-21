@@ -14,5 +14,7 @@ namespace Library.Model
         public string AuthorName { get; set; }
         public string PublishedDate { get; set; }
         public int Quantity { get; set; }
+      
+        public virtual LibraryCardBookReservation ReservedBooks { get; set; }
     }
 }

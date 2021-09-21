@@ -20,6 +20,7 @@ namespace Library.Api.Controllers
             return libraryCardService;
         }
 
+        [ActionName("Get All Library Cards")]
         public IHttpActionResult Get()
         {
             LibraryCardService libraryCardService = CreateLibraryCardService();
@@ -31,6 +32,7 @@ namespace Library.Api.Controllers
             return Ok(libraryCards);
         }
 
+        [ActionName("Create Library Card")]
         public IHttpActionResult Post(LibraryCardCreate libraryCard)
         {
             if (!ModelState.IsValid)
@@ -44,8 +46,8 @@ namespace Library.Api.Controllers
             return Ok("You successfully created a library card.");
         }
 
-        
 
+        [ActionName("Get Library Card by ID")]
         public IHttpActionResult Get(int id)
         {
             LibraryCardService libraryCardService = CreateLibraryCardService();
@@ -53,6 +55,7 @@ namespace Library.Api.Controllers
             return Ok(card);
         }
 
+        [ActionName("Update Library Card")]
         public IHttpActionResult Put(LibraryCardEdit card)
         {
             if (!ModelState.IsValid)
@@ -66,6 +69,8 @@ namespace Library.Api.Controllers
             return Ok();
         }
 
+        
+        [ActionName("Delete Library Card by ID")]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateLibraryCardService();

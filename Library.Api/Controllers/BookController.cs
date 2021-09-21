@@ -20,15 +20,17 @@ namespace Library.Api.Controllers
             return bookService;
         }
 
+        [ActionName("Get Books by Library Card ID")]
         public IHttpActionResult GetBooksByLibraryCardId(int libraryId)
         {
             var service = CreateBookService();
-            var book = service.GetAllBooksByLibraryCardId(libraryId);
+            var book = service.GetAllBooksByLibraryCardId(libraryId);            
             return Ok(book);
 
         }
 
-        public IHttpActionResult Get()
+        [ActionName("Get All Books")]
+        public IHttpActionResult GetBooks()
         {
             BookService bookService = CreateBookService();
             var books = bookService.GetBooks();
@@ -39,7 +41,8 @@ namespace Library.Api.Controllers
             return Ok(books);
         }
 
-        public IHttpActionResult Post(BookCreate book)
+        [ActionName("Create Book")]
+        public IHttpActionResult CreateBook(BookCreate book)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -52,7 +55,8 @@ namespace Library.Api.Controllers
             return Ok("you successfuly created a book");
         }
 
-        public IHttpActionResult Post (int bookid, int libraryid)
+        [ActionName("Add book to library card")]
+        public IHttpActionResult PostBookToLibraryCard (int bookid, int libraryid)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -78,8 +82,8 @@ namespace Library.Api.Controllers
         }
 
         
-        [ActionName("ReserveBook")]
-        public IHttpActionResult ReserveBook(int bookid, int libraryid)
+        [ActionName("Reserve Book to Library Card")]
+        public IHttpActionResult ReserveBook(LibraryCardBookReservation reserve)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -88,23 +92,24 @@ namespace Library.Api.Controllers
 
             var ctx = new ApplicationDbContext();
 
-            LibraryCard books = ctx.LibraryCards.Find(libraryid);
+            LibraryCard books = ctx.LibraryCards.Find(reserve.LibraryCardId, reserve.BookId);
 
             if (books.ListOfBooks.Count > 3)
                 return BadRequest("You reached the maximum books you can borrow");
 
-            Book book = ctx.Books.Find(bookid);
+            Book book = ctx.Books.Find(reserve.BookId);
 
             if (book.Quantity == 0)
                 return BadRequest("The book you looking for is out of stock");
 
 
-            service.ReserveBooksToLibrarayCard(bookid, libraryid);
+            service.ReserveBooksToLibrarayCard(reserve);
 
             return Ok();
         }
 
-        public IHttpActionResult Delete (int bookId, int libraryId)
+        [ActionName("Remove book from library card")]
+        public IHttpActionResult DeleteBookFromLibraryCard (int bookId, int libraryId)
         {
             var service = CreateBookService();
 
@@ -113,6 +118,7 @@ namespace Library.Api.Controllers
             return Ok($"You removed Book Id No: {bookId} from Library Card Id: {libraryId}");
         }
 
+        [ActionName("Get Book by ID")]
         public IHttpActionResult Get(int id)
         {
             BookService bookService = CreateBookService();
@@ -120,7 +126,7 @@ namespace Library.Api.Controllers
             return Ok(book);
         }
 
-        [Route("api/Book/{id}/Update")]
+        [ActionName("Edit Book by ID")]
         public IHttpActionResult Put(BookEdit book)
         {
             if (!ModelState.IsValid)
@@ -134,8 +140,8 @@ namespace Library.Api.Controllers
             return Ok($"You updated book Id No: {book.BookId}");
         }
 
-        [Route("api/Book/{id}/Restock")]
-        public IHttpActionResult Put(BookAmount amount)
+        [ActionName("Restock Books")]
+        public IHttpActionResult RestockBooks(BookAmount amount)
         {
             var service = CreateBookService();
 
@@ -145,6 +151,7 @@ namespace Library.Api.Controllers
             return Ok();
         }
 
+        [ActionName("Delete Book from Database")]
         public IHttpActionResult Delete (int id)
         {
             var service = CreateBookService();

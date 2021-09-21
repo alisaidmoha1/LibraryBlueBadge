@@ -20,6 +20,8 @@ namespace Library.Api.Controllers
             var checkoutService = new CheckoutService(userId);
             return checkoutService;
         }
+
+        [ActionName("Get all Checkouts")]
         public IHttpActionResult Get()
         {
             CheckoutService checkoutService = CreateCheckoutService();
@@ -27,6 +29,8 @@ namespace Library.Api.Controllers
 
             return Ok(checkout);
         }
+
+        [ActionName("Create Checkout")]
         public IHttpActionResult Post(CheckoutCreate checkout)
         {
             if (!ModelState.IsValid)

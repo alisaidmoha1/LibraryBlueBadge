@@ -15,8 +15,8 @@ namespace Library.Data
         [Required]
         public string FullName { get; set; }
         public string Address { get; set; }
-        public Guid AdminId { get; set; }
-        public int Amount { get; set; }        
+        public Guid AdminId { get; set; }      
+        public virtual ICollection<Book> ReservedBooks { get; set; }        
         public virtual ICollection<Book> ListOfBooks { get; set; }
         public LibraryCard()
         {

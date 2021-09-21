@@ -20,5 +20,7 @@ namespace Library.Model
         public int Quantity { get; set; }
 
         public DateTime DateOfCheckout { get; set; }
+
+        public string FullName { get; set; }
     }
 }

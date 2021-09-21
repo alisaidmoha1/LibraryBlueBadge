@@ -66,6 +66,8 @@ namespace Library.Service
 
                         LibraryCardId = checkout.LibraryCardId,
 
+                        FullName = ctx.LibraryCards.Single(l => l.LibraryCardId == checkout.LibraryCardId).FullName,
+
                         Quantity = checkout.Quantity,
 
                         DateOfCheckout = checkout.DateOfCheckout

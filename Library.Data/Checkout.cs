@@ -21,6 +21,8 @@ namespace Library.Data
         public virtual LibraryCard LibraryCards { get; set; }
         [Required]
         public DateTime DateOfCheckout { get; set; }
+
+        public DateTime DueDate { get; set; } = DateTime.Today.AddDays(21);
         [Required]
         public int Quantity { get; set; }
 

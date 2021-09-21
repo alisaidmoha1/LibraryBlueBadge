@@ -92,7 +92,7 @@ namespace Library.Api.Controllers
 
             var ctx = new ApplicationDbContext();
 
-            LibraryCard books = ctx.LibraryCards.Find(reserve.LibraryCardId, reserve.BookId);
+            LibraryCard books = ctx.LibraryCards.Find(reserve.LibraryCardId);
 
             if (books.ListOfBooks.Count > 3)
                 return BadRequest("You reached the maximum books you can borrow");
@@ -109,13 +109,49 @@ namespace Library.Api.Controllers
         }
 
         [ActionName("Remove book from library card")]
-        public IHttpActionResult DeleteBookFromLibraryCard (int bookId, int libraryId)
+        public IHttpActionResult DeleteBookFromLibraryCard (ReturnBook book)
         {
             var service = CreateBookService();
 
-            service.RemoveBooksFromLibraryCard(bookId, libraryId);                
+            service.RemoveBooksFromLibraryCard(book);
 
-            return Ok($"You removed Book Id No: {bookId} from Library Card Id: {libraryId}");
+            return Ok($"You removed Book Id No: {book.BookId} from Library Card Id: {book.LibraryCardId}");
+        }
+
+
+
+        [ActionName("Return book from library card")]
+        public IHttpActionResult Delete (ReturnBook book)
+        {
+            var service = CreateBookService();
+
+            service.RemoveBooksFromLibraryCard(book);
+
+
+            var ctx = new ApplicationDbContext();
+
+            Checkout checkout = ctx.Checkouts.Find(book.BookId);
+
+            var daysLate = book.ReturnDate - checkout.DueDate;
+
+            if (daysLate.Days > 0)
+            {
+
+                int dayCount = 0;
+
+                for (int i = 1; i <= daysLate.Days; i++)
+                {
+                    if (checkout.DueDate.AddDays(i).DayOfWeek != DayOfWeek.Sunday)
+                        dayCount++;
+                }
+
+                Decimal fine = dayCount * 0.10m;
+
+
+                return Ok($"You returned Book Id No: {book.BookId} and you should pay ${fine} because you were late {daysLate.Days} days");
+            }
+
+            return Ok($"You returned Book Id No: {book.BookId}");
         }
 
         [ActionName("Get Book by ID")]

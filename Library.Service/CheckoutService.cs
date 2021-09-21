@@ -8,7 +8,8 @@ namespace Library.Service
 {
     public class CheckoutService
     {
-        private readonly Guid _userId;        
+
+        private readonly Guid _userId;     
 
         public CheckoutService(Guid userId)
         {
@@ -24,8 +25,6 @@ namespace Library.Service
                     BookId = model.BookId,                    
 
                     LibraryCardId = model.LibraryCardId,
-
-                    Quantity = model.Quantity,
 
                     DateOfCheckout = System.DateTime.UtcNow
                 };
@@ -54,7 +53,7 @@ namespace Library.Service
 
                             LibraryCardId = e.LibraryCardId,
 
-                            Quantity = e.Quantity,
+                            Quantity = e.LibraryCards.ListOfBooks.Count,
 
                             DateOfCheckout = e.DateOfCheckout
 

@@ -36,29 +36,6 @@ namespace Library.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var ctx = new ApplicationDbContext();
-            Book books = ctx.Books.Find(checkout.BookId);
-            
-
-            if (checkout.Quantity <= 0)
-                return BadRequest("You have to take at least one book to checkout");
-
-            if (books == null)
-                return BadRequest("Invalid Book ID");
-
-            if (books.Quantity < 0)
-                return BadRequest("This book is out of stock right now");
-
-            if (books.Quantity < checkout.Quantity)
-                return BadRequest("Not enough books are in the library");
-
-            //if (LibraryCard.Books.Count == 3)
-                //return BadRequest("rary card has maxed out checkouts");
-
-            books.Quantity -= checkout.Quantity;
-
-            ctx.SaveChanges();
-
             var service = CreateCheckoutService();
 
             if (!service.CreateCheckout(checkout))
@@ -66,5 +43,7 @@ namespace Library.Api.Controllers
 
             return Ok();
         }
+
+
     }
 }

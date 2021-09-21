@@ -19,22 +19,23 @@ namespace Library.Service
         {
             using (var ctx = new ApplicationDbContext())
             {
-                
+
                 var foundBook = ctx.Books.Single(b => b.BookId == bookId);
                 var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
                 foundBook.ListOfLibraryCards.Add(foundLibraryCard);
                 foundBook.Quantity--;
                 var result = ctx.SaveChanges() == 1;
-                
+
             }
         }
-        public void RemoveBooksFromLibraryCard(int bookId, int libraryCardId)
+        public void RemoveBooksFromLibraryCard(ReturnBook book)
+
         {
             using (var ctx = new ApplicationDbContext())
             {
 
-                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
-                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
+                var foundBook = ctx.Books.Single(b => b.BookId == book.BookId);
+                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == book.LibraryCardId);
                 foundBook.ListOfLibraryCards.Remove(foundLibraryCard);
                 foundBook.Quantity++;
                 var result = ctx.SaveChanges() == 1;
@@ -46,33 +47,18 @@ namespace Library.Service
         {
             using (var ctx = new ApplicationDbContext())
             {
-                              
+
                 var foundBook = ctx.Books.Single(b => b.BookId == reserve.BookId);
                 var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == reserve.LibraryCardId);
+                reserve.IsReserved = true;
                 reserve.ReserveDate = DateTime.UtcNow;
                 reserve.PickUpDate = DateTime.UtcNow.AddDays(7);
                 foundBook.ListOfLibraryCards.Add(foundLibraryCard);
                 foundBook.Quantity--;
-                foundLibraryCard.ReservedBooks.Add(foundBook);
-                var result = ctx.SaveChanges() == 1;
-                
-            }
-        }
-
-        public void RemoveBooksReserveFromLibraryCard(int bookId, int libraryCardId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-
-                var foundBook = ctx.Books.Single(b => b.BookId == bookId);
-                var foundLibraryCard = ctx.LibraryCards.Single(b => b.LibraryCardId == libraryCardId);
-                foundBook.ListOfLibraryCards.Remove(foundLibraryCard);
-                foundBook.Quantity++;
                 var result = ctx.SaveChanges() == 1;
 
             }
         }
-
 
         public IEnumerable<BookList> GetAllBooksByLibraryCardId(int libraryCardId)
         {
@@ -85,18 +71,19 @@ namespace Library.Service
                         ISBN = e.ISBN,
                         AuthorName = e.AuthorName,
                         PublishedDate = e.PublishedDate,
-
                     }
 
                         );
                 return foundBooks.ToArray();
+
+
             }
         }
 
         public bool CreateBoook(BookCreate book)
         {
             var entity = new Book()
-            {                
+            {
                 AdminId = _userId,
                 Title = book.Title,
                 ISBN = book.ISBN,
@@ -104,7 +91,7 @@ namespace Library.Service
                 PublishedDate = book.PublishedDate,
                 Quantity = book.Quantity,
             };
-            
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Books.Add(entity);
@@ -153,11 +140,11 @@ namespace Library.Service
             }
         }
 
-        
+
 
         public bool UpdateBook(BookEdit book)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Books.Single(e => e.BookId == book.BookId && e.AdminId == _userId);
 

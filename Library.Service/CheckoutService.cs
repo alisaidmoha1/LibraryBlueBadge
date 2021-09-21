@@ -50,25 +50,32 @@ namespace Library.Service
                     ctx
                     .Checkouts
 
-                    .Where(e => e.AdminId == _userId)
+                    .Where(e => e.AdminId == _userId).ToList();
 
-                    .Select(
-                        e =>
-                        new CheckoutListItem
-                        {
-                            CheckoutID = e.CheckoutID,
+                var queryResults = new List<CheckoutListItem>();
 
-                            BookId = e.BookId,
+                foreach (var checkout in query)
+                {
+                    var checkoutReceipt = new CheckoutListItem
+                    {
+                        CheckoutID = checkout.CheckoutID,
 
-                            LibraryCardId = e.LibraryCardId,
+                        BookId = checkout.BookId,
 
-                            Quantity = e.Quantity,
+                        BookName = ctx.Books.Single(b => b.BookId == checkout.BookId).Title,
 
-                            DateOfCheckout = e.DateOfCheckout
+                        LibraryCardId = checkout.LibraryCardId,
 
-                        }
-                        );
-                return query.ToArray();
+                        Quantity = checkout.Quantity,
+
+                        DateOfCheckout = checkout.DateOfCheckout
+
+                    };
+                    queryResults.Add(checkoutReceipt);
+
+                };
+                                    
+                return queryResults;
             }
         }
         public bool UpdateCheckout(CheckoutEdit model)

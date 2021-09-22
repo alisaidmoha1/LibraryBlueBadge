@@ -118,18 +118,16 @@ namespace Library.Service
             }
         }
 
-        public List<string> GetAllBooksOnLibraryCard(int libraryCardId)
+        public List<string> GetAllTitlesOnLibraryCard(int libraryCardId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                //take in a library card id to find a librarycard
-                //look For all checkouts with library card id
+               
                 var checkouts =
                     ctx
                     .Checkouts
                     .Where(e => e.LibraryCardId == libraryCardId).ToList();
 
-                //looking through the checkouts with the library card id attached find all books attached by bookid
               var titles =  new List<string>();
                 foreach (var checkout in checkouts)
                 {
@@ -139,12 +137,6 @@ namespace Library.Service
                         .Single(b => b.BookId == checkout.BookId);
                     titles.Add(book.Title);
                 }
-
-                //from those books retrieve the title
-
-                //make a list out of those titles
-
-                //output titles as a list
 
                 return titles;
             }

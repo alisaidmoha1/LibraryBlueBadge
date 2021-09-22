@@ -15,5 +15,6 @@ namespace Library.Model
         public int LibraryCardId { get; set; }       
 
         public DateTime DateOfCheckout { get; set; }
+
     }
 }

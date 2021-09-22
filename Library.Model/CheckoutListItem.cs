@@ -12,10 +12,15 @@ namespace Library.Model
         public int CheckoutID { get; set; }
         
         public int BookId { get; set; }
+
+        public string BookName { get; set; }
         
         public int LibraryCardId { get; set; }
         
-        public int Quantity { get; set; }
+        //public int Quantity { get; set; }
+
         public DateTime DateOfCheckout { get; set; }
+
+        public string FullName { get; set; }
     }
 }

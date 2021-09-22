@@ -1,5 +1,5 @@
-﻿using Library.Data;
-using Library.Model;
+using Library.Data;
+﻿using Library.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,6 @@ namespace Library.Service
         {
             _userId = userId;
         }
-
         public void AddBooksToLibrarayCard(int bookId, int libraryCardId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -80,7 +79,7 @@ namespace Library.Service
             }
         }
 
-        public bool CreateBoook(BookCreate book)
+        public bool CreateBook(BookCreate book)
         {
             var entity = new Book()
             {

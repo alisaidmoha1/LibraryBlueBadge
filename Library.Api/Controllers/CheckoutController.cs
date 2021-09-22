@@ -14,23 +14,28 @@ namespace Library.Api.Controllers
     [Authorize]
     public class CheckoutController : ApiController
     {
+
         private CheckoutService CreateCheckoutService()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var checkoutService = new CheckoutService(userId);
+
+            var checkoutId = Guid.Parse(User.Identity.GetUserId());
+            var checkoutService = new CheckoutService(checkoutId);
+                       
             return checkoutService;
+            
         }
 
         [ActionName("Get all Checkouts")]
         public IHttpActionResult Get()
         {
             CheckoutService checkoutService = CreateCheckoutService();
-            var checkout = checkoutService.GetCheckouts();
+            var checkouts = checkoutService.GetCheckouts();
+            return Ok(checkouts);
 
-            return Ok(checkout);
         }
 
         [ActionName("Create Checkout")]
+
         public IHttpActionResult Post(CheckoutCreate checkout)
         {
             if (!ModelState.IsValid)
@@ -43,7 +48,45 @@ namespace Library.Api.Controllers
 
             return Ok();
         }
+        
+        public IHttpActionResult Put(CheckoutEdit checkout)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
+            var service = CreateCheckoutService();
+            if (!service.UpdateCheckout(checkout))
+                return InternalServerError();
 
+            return Ok();
+        }
+
+        public IHttpActionResult Delete(int checkoutId)
+        {
+            var service = CreateCheckoutService();
+            if (!service.DeleteCheckout(checkoutId))
+                return InternalServerError();
+
+            return Ok();
+        }
+
+        //[HttpPut]
+        //[Route("api/Checkout/{checkoutId}/Return")]
+        //public IHttpActionResult ReturnCheckout(int checkoutId)
+        //{
+        //    var service = CreateCheckoutService();
+        //    if (!service.ReturnCheckout(checkoutId))
+        //        return InternalServerError();
+        //    return Ok();
+        //}
+        [HttpGet]
+        [Route("api/Checkout/{libraryCardId}/AllBooks")]
+        public IHttpActionResult GetAllBooksOnLibraryCard(int libraryCardId)
+        {
+            CheckoutService checkoutService = CreateCheckoutService();
+            var checkouts = checkoutService.GetAllTitlesOnLibraryCard(libraryCardId);
+            return Ok(checkouts);
+        }
     }
 }
+

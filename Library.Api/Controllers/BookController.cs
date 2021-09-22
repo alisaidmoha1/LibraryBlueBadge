@@ -49,7 +49,7 @@ namespace Library.Api.Controllers
 
             var service = CreateBookService();
 
-            if (!service.CreateBoook(book))
+            if (!service.CreateBook(book))
                 return InternalServerError();
 
             return Ok("you successfuly created a book");

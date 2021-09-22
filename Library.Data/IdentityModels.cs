@@ -21,7 +21,7 @@ namespace Library.Data
             // Add custom user claims here
             return userIdentity;
         }
-        public int LibraryCardId { get; set; }
+       
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

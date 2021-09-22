@@ -96,6 +96,14 @@ namespace Library.Api.Controllers
                 return InternalServerError();
             return Ok();
         }
+        [HttpGet]
+        [Route("api/Checkout/{libraryCardId}/AllBooks")]
+        public IHttpActionResult GetAllBooksOnLibraryCard(int libraryCardId)
+        {
+            CheckoutService checkoutService = CreateCheckoutService();
+            var checkouts = checkoutService.GetAllBooksOnLibraryCard(libraryCardId);
+            return Ok(checkouts);
+        }
     }
 }
 

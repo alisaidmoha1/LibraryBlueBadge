@@ -17,14 +17,23 @@ namespace Library.Api
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
+            // Controllers with Actions
+            // To handle routes like `/api/VTRouting/route`
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "WithActionApi",
+                routeTemplate: "api/{controller}/{action}"
             );
+
+            // Original route - we wanted to keep incase needed in the future.
+            // Web API routes
+            //config.MapHttpAttributeRoutes();
+
+            //config.Routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "api/{controller}/{id}",
+            //    defaults: new { id = RouteParameter.Optional }
+            //);
+
         }
     }
 }

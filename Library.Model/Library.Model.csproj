@@ -54,11 +54,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookAmount.cs" />
+    <Compile Include="BookCreate.cs" />
+    <Compile Include="BookEdit.cs" />
+    <Compile Include="BookList.cs" />
+    <Compile Include="CheckoutCreate.cs" />
+    <Compile Include="CheckoutDetail.cs" />
+    <Compile Include="CheckoutEdit.cs" />
+    <Compile Include="CheckoutListItem.cs" />
+    <Compile Include="LibraryCardBookReservation.cs" />
+    <Compile Include="LibraryCardCreate.cs" />
+    <Compile Include="LibraryCardDetail.cs" />
+    <Compile Include="LibraryCardEdit.cs" />
+    <Compile Include="LibraryCardListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReturnBook.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library.Data\Library.Data.csproj">
+      <Project>{685AB61C-AF20-4700-8955-13BBF84640BE}</Project>
+      <Name>Library.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
